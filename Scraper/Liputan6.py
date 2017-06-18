@@ -20,10 +20,13 @@ class Liputan6:
         me-return sebuah string berisi berita yanghtmlFile kompas.com
         yang sudah diekstrak
         """
-        soup = BeautifulSoup(htmlFile.content, 'html.parser')
-        text =  soup.find('div','article-content-body__item-content').getText()
-        text = text.replace(soup.find('div','baca-juga').getText(),"")
-        return text.replace('Liputan6.com, ','')
+        try:
+            soup = BeautifulSoup(htmlFile.content, 'html.parser')
+            text =  soup.find('div','article-content-body__item-content').getText()
+            text = text.replace(soup.find('div','baca-juga').getText(),"")
+            return text.replace('Liputan6.com, ','')
+        except:
+            return None
     def extractPublikasi(date):
         """
         Meng-ekstrak semua artikel bisnis keuangan yang

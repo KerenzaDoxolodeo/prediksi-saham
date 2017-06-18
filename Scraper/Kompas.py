@@ -20,10 +20,13 @@ class Kompas:
         me-return sebuah string berisi berita yanghtmlFile kompas.com
         yang sudah diekstrak
         """
-        soup = BeautifulSoup(htmlFile.content, 'html.parser')
-        text = soup.find('div','read__content').getText()
-        text += " ".join([I.getText() for I in soup.find_all('p')])
-        return  text.replace('KOMPAS.com - ','')
+        try:
+            soup = BeautifulSoup(htmlFile.content, 'html.parser')
+            text = soup.find('div','read__content').getText()
+            text += " ".join([I.getText() for I in soup.find_all('p')])
+            return  text.replace('KOMPAS.com - ','')
+        except:
+            return None
     def extractPublikasi(date):
         """
         Meng-ekstrak semua artikel bisnis keuangan yang
